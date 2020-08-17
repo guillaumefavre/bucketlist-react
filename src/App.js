@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
+import Item from './components/Item';
+import Category from './components/Category';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Bucketlist is coming
-        </p>
+        <Category />
+        <Item></Item>
       </header>
     </div>
   );
