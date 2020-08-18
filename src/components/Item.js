@@ -1,7 +1,8 @@
 import React from 'react'
 
-function Item() {
-    return <p>Item A</p>;
-}
+const Item = ({status, textColor}) => (
+
+    <p style={{ color: textColor}}>Item A {status}</p>
+)
 
 export default Item;

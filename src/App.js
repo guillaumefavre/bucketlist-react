@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Category />
-        <Item></Item>
+        <Item status="todo" textColor="orange"></Item>
       </header>
     </div>
   );
