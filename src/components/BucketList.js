@@ -1,20 +1,32 @@
 import React from 'react'
 import Item from './Item';
+import Category from './Category';
 
 
-const BucketList = ({items: itemsData}) => {
-    const itemsComponents = [];
+const BucketList = ({items}) => {
+    const rows = [];
 
-    itemsData.forEach((element) => {
-        itemsComponents.push(
-            <Item key={element.id} label={element.label} textColor="orange"></Item>
+    // Récupération des différentes catégories
+    const uniqueCategories = [...new Set(items.map(item => item.category))];
+
+    // Parcours des catégories pour afficher les items associés
+    uniqueCategories.forEach((category) => {
+
+        rows.push(
+            <Category key={category} label={category}/>
         );
+        const itemsByCategory = items.filter(element => element.category === category);
+
+        itemsByCategory.forEach((element) => {
+            rows.push(
+                <Item key={element.id} label={element.label} textColor="orange"></Item>
+            );
+        });
     });
 
     return <div className="App">
       <header className="App-header">
-        <h1>Bucketlist</h1>
-        {itemsComponents}
+        {rows}
       </header>
     </div>
 }

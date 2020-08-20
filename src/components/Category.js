@@ -1,6 +1,5 @@
 import React from 'react'
 
-const Category = () => <h2>Catégorie 1</h2>;
-
+const Category = ({label}) => <h2>{label}</h2>;
 
 export default Category;
