@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import BucketList from './components/BucketList';
+import NewItemForm from './components/NewItemForm';
 
 const ITEMS = [
   {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
@@ -13,7 +14,12 @@ const ITEMS = [
 
 function App() {
   return (
-    <BucketList items={ITEMS} />
+    <div>
+      <NewItemForm />
+      <BucketList items={ITEMS} />
+
+    </div>
+
   );
 }
 
