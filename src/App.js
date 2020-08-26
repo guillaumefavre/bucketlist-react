@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
@@ -12,15 +12,33 @@ const ITEMS = [
   {id: '6', category: 'Apprentissage', label: 'Parler anglais couramment', status: 'DOING'}
 ];
 
-function App() {
-  return (
-    <div>
-      <NewItemForm />
-      <BucketList items={ITEMS} />
+class App extends Component {
 
-    </div>
+  constructor(props) {
+    super(props);
 
-  );
+    this.state = {
+      items: ITEMS
+    }
+
+    this.addItem = this.addItem.bind(this);
+    
+  }
+
+  addItem(newItemLabel) {
+    const { items } = this.state
+    const newItem = {id: '100', category: 'Voyage', label: newItemLabel, status: 'TODO'}
+    this.setState({ items: [...items, newItem] });
+  }
+
+  render() {
+    return (
+      <div>
+        <NewItemForm addItem={this.addItem}/>
+        <BucketList items={this.state.items} />
+      </div>
+    );
+  }
 }
 
 export default App;

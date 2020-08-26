@@ -4,16 +4,22 @@ class NewItemForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {label: ''}
+        this.state = {
+            label: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleAddItem = this.handleAddItem.bind(this);
     }
 
     handleChange(event) {
-        console.log('handleChange');
+        this.setState({label: event.target.value});
     }
 
     handleAddItem(event) {
-        console.log('handleAddItem');
         event.preventDefault();
+        event.target.reset();
+        this.props.addItem(this.state.label)
     }
 
     render() {
