@@ -24,7 +24,7 @@ class NewItemForm extends Component {
 
     render() {
         return (
-        <form onSubmit={this.handleAddItem}>
+        <form className="App-form" onSubmit={this.handleAddItem}>
             <input 
                 type="text" 
                 value={this.state.labelItem}
