@@ -25,9 +25,9 @@ class App extends Component {
     
   }
 
-  addItem(newItemLabel) {
+  addItem(newItemLabel, category) {
     const { items } = this.state
-    const newItem = {id: '100', category: 'Voyage', label: newItemLabel, status: 'TODO'}
+    const newItem = {id: '100', category: category, label: newItemLabel, status: 'TODO'}
     this.setState({ items: [...items, newItem] });
   }
 
