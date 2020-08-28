@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
+import { v4 as uuidv4 } from 'uuid';
 
 const ITEMS = [
   {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
@@ -27,7 +28,7 @@ class App extends Component {
 
   addItem(newItemLabel, category) {
     const { items } = this.state
-    const newItem = {id: '100', category: category, label: newItemLabel, status: 'TODO'}
+    const newItem = {id: uuidv4(), category: category, label: newItemLabel, status: 'TODO'}
     this.setState({ items: [...items, newItem] });
   }
 
