@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
+import icons from 'glyphicons'
 
-const Item = ({label, status, textColor}) => (
+class Item extends Component {
 
-    <p style={{ color: textColor}}>{label}</p>
-)
+
+    onClickCheckbox() {
+        console.log('checkbox')
+    }
+
+    render() {
+
+        return <div className="item">
+            <span className="glyphicon glyphicon-ok icon" aria-hidden="true" 
+                onClick={this.onClickCheckbox}>{icons.ok}</span>
+            <p style={{ color: this.props.textColor}}>{this.props.label}</p>
+        </div>
+    }
+
+}
 
 export default Item;
