@@ -34,7 +34,8 @@ class NewItemForm extends Component {
             <input 
                 type="text" 
                 value={this.state.labelItem}
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                required/>
             <select value={this.state.category} onChange={this.handleChangeCategory}>
                 <option value="Voyage">Voyage</option>
                 <option value="Sport">Sport</option>
