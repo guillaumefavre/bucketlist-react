@@ -19,7 +19,7 @@ const BucketList = ({items}) => {
 
         itemsByCategory.forEach((element) => {
             rows.push(
-                <Item key={element.id} label={element.label} textColor="orange"></Item>
+                <Item key={element.id} id={element.id} label={element.label} status={element.status} textColor="orange"></Item>
             );
         });
     });
