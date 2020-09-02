@@ -10,6 +10,7 @@ class Item extends Component {
 
     onClickCheckbox() {
         console.log('checkbox : ', this.props.id, this.props.label)
+        this.props.changeStatus(this.props.id)
         //this.props.changeStatus('tototototo')
     }
 

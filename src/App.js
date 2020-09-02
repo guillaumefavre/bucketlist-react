@@ -32,15 +32,18 @@ class App extends Component {
     this.setState({ items: [...items, newItem] });
   }
 
-  changeStatus() {
-    console.log('changeStatus')
+  changeStatus(itemId) {
+    const { items } = this.state
+    var item = items.find(element => element.id === itemId)
+    item.status = item.status === 'TODO' ? 'DONE' : 'TODO'
+    this.setState({ items: items });
   }
 
   render() {
     return (
       <div>
         <NewItemForm addItem={this.addItem}/>
-        <BucketList items={this.state.items}  />
+        <BucketList items={this.state.items} changeStatus={this.changeStatus}  />
       </div>
     );
   }
