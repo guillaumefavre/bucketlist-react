@@ -10,7 +10,7 @@ const ITEMS = [
   {id: '3', category: 'Voyage', label: 'Voyager en Asie', status: 'TODO'},
   {id: '4', category: 'Voyage', label: 'Visiter le Colisée', status: 'DONE'},
   {id: '5', category: 'Sport', label: 'Sauter en parachute', status: 'TODO'},
-  {id: '6', category: 'Apprentissage', label: 'Parler anglais couramment', status: 'DOING'}
+  {id: '6', category: 'Apprentissage', label: 'Apprendre une langue d\'un autre alphabet', status: 'TODO'}
 ];
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
     }
 
     this.addItem = this.addItem.bind(this);
-    
+    this.changeStatus = this.changeStatus.bind(this);
   }
 
   addItem(newItemLabel, category) {
@@ -32,11 +32,18 @@ class App extends Component {
     this.setState({ items: [...items, newItem] });
   }
 
+  changeStatus(itemId) {
+    const { items } = this.state
+    var item = items.find(element => element.id === itemId)
+    item.status = item.status === 'TODO' ? 'DONE' : 'TODO'
+    this.setState({ items: items });
+  }
+
   render() {
     return (
       <div>
         <NewItemForm addItem={this.addItem}/>
-        <BucketList items={this.state.items} />
+        <BucketList items={this.state.items} changeStatus={this.changeStatus}  />
       </div>
     );
   }
