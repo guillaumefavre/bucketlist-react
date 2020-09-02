@@ -15,10 +15,11 @@ class Item extends Component {
     }
 
     render() {
+        var itemClass = this.props.status === 'TODO' ? 'todo' : 'done'
         return <div className="item">
             <span className="glyphicon glyphicon-ok icon" aria-hidden="true" 
                 onClick={this.onClickCheckbox}>{icons.ok}</span>
-            <p style={{ color: this.props.textColor}}>{this.props.label} ({this.props.status})</p>
+            <p className={itemClass}>{this.props.label} ({this.props.status})</p>
         </div>
     }
 

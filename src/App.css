@@ -46,6 +46,14 @@
   justify-content: center;
 }
 
+.todo {
+  color: red;
+}
+
+.done {
+  color: green;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
