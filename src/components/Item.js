@@ -6,12 +6,15 @@ class Item extends Component {
     constructor(props) {
         super(props);
         this.onClickCheckbox = this.onClickCheckbox.bind(this);
+        this.onClickRemove = this.onClickRemove.bind(this);
     }
 
     onClickCheckbox() {
-        console.log('checkbox : ', this.props.id, this.props.label)
         this.props.changeStatus(this.props.id)
-        //this.props.changeStatus('tototototo')
+    }
+
+    onClickRemove() {
+        this.props.removeItem(this.props.id)
     }
 
     render() {
@@ -20,6 +23,8 @@ class Item extends Component {
             <span className="glyphicon glyphicon-ok icon" aria-hidden="true" 
                 onClick={this.onClickCheckbox}>{icons.ok}</span>
             <p className={itemClass}>{this.props.label} ({this.props.status})</p>
+            <span className="glyphicon glyphicon-trash icon" aria-hidden="true" 
+                onClick={this.onClickRemove}>{icons.cancel}</span>
         </div>
     }
 
