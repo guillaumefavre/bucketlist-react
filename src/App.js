@@ -27,6 +27,15 @@ class App extends Component {
     this.removeItem = this.removeItem.bind(this);
   }
 
+  componentDidMount() {
+
+    fetch('http://localhost:8090/bucketlist/1/items')
+      .then(response => response.json())
+      .then(response => console.log(JSON.stringify(response)))
+      .catch(error => console.log("Erreur : " + error));
+
+  }
+
   addItem(newItemLabel, category) {
     const { items } = this.state
     const newItem = {id: uuidv4(), category: category, label: newItemLabel, status: 'TODO'}
