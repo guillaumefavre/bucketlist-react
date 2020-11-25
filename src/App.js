@@ -4,14 +4,19 @@ import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
 import { v4 as uuidv4 } from 'uuid';
 
-const ITEMS = [
-  {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
-  {id: '2', category: 'Sport', label: 'Courir un marathon', status: 'TODO'},
-  {id: '3', category: 'Voyage', label: 'Voyager en Asie', status: 'TODO'},
-  {id: '4', category: 'Voyage', label: 'Visiter le Colisée', status: 'DONE'},
-  {id: '5', category: 'Sport', label: 'Sauter en parachute', status: 'TODO'},
-  {id: '6', category: 'Apprentissage', label: 'Apprendre une langue d\'un autre alphabet', status: 'TODO'}
-];
+// const ITEMS_OLD = [
+//   {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
+//   {id: '2', category: 'Sport', label: 'Courir un marathon', status: 'TODO'},
+//   {id: '3', category: 'Voyage', label: 'Voyager en Asie', status: 'TODO'},
+//   {id: '4', category: 'Voyage', label: 'Visiter le Colisée', status: 'DONE'},
+//   {id: '5', category: 'Sport', label: 'Sauter en parachute', status: 'TODO'},
+//   {id: '6', category: 'Apprentissage', label: 'Apprendre une langue d\'un autre alphabet', status: 'TODO'}
+// ];
+
+// const ITEMS_NEW = [
+//   {"id":'7',"label":"Visiter le Colisée","status":"DONE","category":{"id":'2',"label":"Voyages"}},
+//   {"id":'6',"label":"Assister aux JO","status":"DOING","category":{"id":'1',"label":"Sport"}}
+// ];
 
 class App extends Component {
 
@@ -19,7 +24,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      items: ITEMS
+      items: []
     }
 
     this.addItem = this.addItem.bind(this);
@@ -31,7 +36,11 @@ class App extends Component {
 
     fetch('http://localhost:8090/bucketlist/1/items')
       .then(response => response.json())
-      .then(response => console.log(JSON.stringify(response)))
+      .then(response => {
+        console.log(JSON.stringify(response))
+        console.log('response.length : ', response.length)
+        this.setState({ items: response });
+      })
       .catch(error => console.log("Erreur : " + error));
 
   }
