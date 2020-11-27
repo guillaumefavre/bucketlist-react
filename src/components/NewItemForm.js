@@ -1,17 +1,29 @@
 import React, { Component } from 'react'
 
+const CATEGORIES = [
+    {id: '1', label: 'Sport'},
+    {id: '2', label: 'Voyage'},
+    {id: '3', label: 'Carrière'},
+    {id: '4', label: 'Apprentissage'}
+  ];
+  
 class NewItemForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             label: '',
-            category: 'Voyage'
+            category: 'Voyage',
+            allCategories: CATEGORIES
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeCategory = this.handleChangeCategory.bind(this);
         this.handleAddItem = this.handleAddItem.bind(this);
+    }
+
+    componentDidMount() {
+        console.log('CATEGORIES : ', CATEGORIES)
     }
 
     handleChange(event) {
@@ -29,6 +41,11 @@ class NewItemForm extends Component {
     }
 
     render() {
+
+        let optionItems = this.state.allCategories.map(category => 
+            <option key={category.id} value={category.label}>{category.label}</option>
+        );
+
         return (
         <form className="App-form" onSubmit={this.handleAddItem}>
             <input 
@@ -37,9 +54,7 @@ class NewItemForm extends Component {
                 onChange={this.handleChange}
                 required/>
             <select value={this.state.category} onChange={this.handleChangeCategory}>
-                <option value="Voyage">Voyage</option>
-                <option value="Sport">Sport</option>
-                <option value="Apprentissage">Apprentissage</option>
+                {optionItems}
             </select>
             <button type="submit">Ajouter</button>
         </form>
