@@ -13,7 +13,7 @@ class NewItemForm extends Component {
         super(props);
         this.state = {
             label: '',
-            category: 'Voyage',
+            category: '1',
             allCategories: CATEGORIES
         }
 
@@ -37,13 +37,14 @@ class NewItemForm extends Component {
     handleAddItem(event) {
         event.preventDefault();
         event.target.reset();
-        this.props.addItem(this.state.label, this.state.category)
+        let categoryNewItem = CATEGORIES.find(categ => categ.id === this.state.category)
+        this.props.addItem(this.state.label, categoryNewItem)
     }
 
     render() {
 
         let optionItems = this.state.allCategories.map(category => 
-            <option key={category.id} value={category.label}>{category.label}</option>
+            <option key={category.id} value={category.id}>{category.label}</option>
         );
 
         return (

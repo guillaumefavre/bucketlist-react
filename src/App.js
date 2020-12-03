@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
-import { v4 as uuidv4 } from 'uuid';
 
 // const ITEMS_OLD = [
 //   {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
@@ -37,8 +36,6 @@ class App extends Component {
     fetch('http://localhost:8090/bucketlist/1/items')
       .then(response => response.json())
       .then(response => {
-        console.log(JSON.stringify(response))
-        console.log('response.length : ', response.length)
         this.setState({ items: response });
       })
       .catch(error => console.log("Erreur : " + error));
@@ -46,9 +43,22 @@ class App extends Component {
   }
 
   addItem(newItemLabel, category) {
+
     const { items } = this.state
-    const newItem = {id: uuidv4(), category: category, label: newItemLabel, status: 'TODO'}
-    this.setState({ items: [...items, newItem] });
+    const newItem = { category: category, label: newItemLabel, status: 'TODO'}
+
+    fetch('http://localhost:8090/bucketlist/1/items', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newItem)
+    }).then(response=>response.json())
+      .then(response => {
+        this.setState({ items: [...items, response] });
+      });
+
   }
 
   changeStatus(itemId) {
