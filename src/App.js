@@ -3,19 +3,6 @@ import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
 
-// const ITEMS_OLD = [
-//   {id: '1', category: 'Voyage', label: 'Aller à New-York', status: 'TODO'},
-//   {id: '2', category: 'Sport', label: 'Courir un marathon', status: 'TODO'},
-//   {id: '3', category: 'Voyage', label: 'Voyager en Asie', status: 'TODO'},
-//   {id: '4', category: 'Voyage', label: 'Visiter le Colisée', status: 'DONE'},
-//   {id: '5', category: 'Sport', label: 'Sauter en parachute', status: 'TODO'},
-//   {id: '6', category: 'Apprentissage', label: 'Apprendre une langue d\'un autre alphabet', status: 'TODO'}
-// ];
-
-// const ITEMS_NEW = [
-//   {"id":'7',"label":"Visiter le Colisée","status":"DONE","category":{"id":'2',"label":"Voyages"}},
-//   {"id":'6',"label":"Assister aux JO","status":"DOING","category":{"id":'1',"label":"Sport"}}
-// ];
 
 class App extends Component {
 
@@ -65,7 +52,18 @@ class App extends Component {
     const { items } = this.state
     var item = items.find(element => element.id === itemId)
     item.status = item.status === 'TODO' ? 'DONE' : 'TODO'
-    this.setState({ items: items });
+
+    fetch('http://localhost:8090/bucketlist/1/items/'+itemId, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    }).then(response=>response.json())
+      .then(response => {
+        this.setState({ items: items });
+      });
   }
 
   removeItem(itemId) {
