@@ -3,7 +3,7 @@ import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
 import CategoriesList from './components/CategoriesList';
-import ItemDetail from './components/ItemDetail';
+import DetailItem from './components/DetailItem';
 import NavigationBar from './components/NavigationBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -101,7 +101,8 @@ class App extends Component {
             )}  
           />
           <Route path="/Categories" exact component={CategoriesList}/>
-          <Route path="/DetailItem" exact component={ItemDetail}/>
+          <Route path="/DetailItem" exact component={DetailItem}/>
+          <Route path="/DetailItem/:slug" exact component={DetailItem}/>
           <Route 
             path="/NewItem" exact 
             render={(props) => (
