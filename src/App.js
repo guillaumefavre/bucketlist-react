@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import BucketList from './components/BucketList';
 import NewItemForm from './components/NewItemForm';
+import CategoriesList from './components/CategoriesList';
 import ItemDetail from './components/ItemDetail';
 import NavigationBar from './components/NavigationBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -86,7 +88,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavigationBar />
+        <Router>
+          <NavigationBar />
+
+          <Route path="/Categories" exact component={CategoriesList}/>
+          <Route path="/ItemDetail" exact component={ItemDetail}/>
+
+
+        </Router>
         <NewItemForm addItem={this.addItem}/>
         <BucketList items={this.state.items} changeStatus={this.changeStatus} removeItem={this.removeItem} />
       </div>
