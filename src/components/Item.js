@@ -1,33 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import icons from 'glyphicons'
 
-class Item extends Component {
+function Item(props) {
 
-    constructor(props) {
-        super(props);
-        this.onClickCheckbox = this.onClickCheckbox.bind(this);
-        this.onClickRemove = this.onClickRemove.bind(this);
-    }
+    let itemClass = props.status === 'TODO' ? 'todo' : 'done'
 
-    onClickCheckbox() {
-        this.props.changeStatus(this.props.id)
-    }
-
-    onClickRemove() {
-        this.props.removeItem(this.props.id)
-    }
-
-    render() {
-        var itemClass = this.props.status === 'TODO' ? 'todo' : 'done'
-        return <div className="item">
+    return(
+        <div className="item">
             <span className="glyphicon glyphicon-ok icon" aria-hidden="true" 
-                onClick={this.onClickCheckbox}>{icons.ok}</span>
-            <p className={itemClass}>{this.props.label} ({this.props.status})</p>
+                onClick={() => props.changeStatus(props.id)}>
+                {icons.ok}
+            </span>
+            <span className={itemClass} >
+                {props.label} ({props.status})
+            </span>
             <span className="glyphicon glyphicon-trash icon" aria-hidden="true" 
-                onClick={this.onClickRemove}>{icons.cancel}</span>
+                onClick={() => props.removeItem(props.id)}>
+                {icons.cancel}
+            </span>
         </div>
-    }
-
+    )
 }
 
 export default Item;
