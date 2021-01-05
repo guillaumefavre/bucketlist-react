@@ -90,14 +90,25 @@ class App extends Component {
       <div>
         <Router>
           <NavigationBar />
-
+          <Route 
+            path="/" exact 
+            render={(props) => (
+              <BucketList {...props} 
+                items={this.state.items} 
+                changeStatus={this.changeStatus} 
+                removeItem={this.removeItem} 
+                addItem={this.addItem} />
+            )}  
+          />
           <Route path="/Categories" exact component={CategoriesList}/>
-          <Route path="/ItemDetail" exact component={ItemDetail}/>
-
-
+          <Route path="/DetailItem" exact component={ItemDetail}/>
+          <Route 
+            path="/NewItem" exact 
+            render={(props) => (
+              <NewItemForm {...props} addItem={this.addItem} />
+            )}  
+          />
         </Router>
-        <NewItemForm addItem={this.addItem}/>
-        <BucketList items={this.state.items} changeStatus={this.changeStatus} removeItem={this.removeItem} />
       </div>
     );
   }

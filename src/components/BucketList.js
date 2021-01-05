@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Item from './Item';
 import Category from './Category';
+import NewItemForm from './NewItemForm';
 
 class BucketList extends Component {
 
@@ -18,8 +19,7 @@ class BucketList extends Component {
         const uniqueCategories = uniqueIds.map(id => {
             return categories.find(cat => cat.id === id)
         })
-  
-    
+
         // Parcours des catégories pour afficher les items associés
         uniqueCategories.forEach((category) => {
     
@@ -38,12 +38,11 @@ class BucketList extends Component {
     
         return <div className="App">
             <header className="App-header">
+            <NewItemForm addItem={this.props.addItem}/>
             {rows}
             </header>
         </div>
     }
-
-
 }
 
 export default BucketList;
