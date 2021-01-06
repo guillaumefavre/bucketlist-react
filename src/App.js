@@ -19,6 +19,7 @@ class App extends Component {
     this.addItem = this.addItem.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
   }
 
   componentDidMount() {
@@ -69,6 +70,10 @@ class App extends Component {
       });
   }
 
+  updateItem(itemId) {
+    console.log('update item')
+  }
+
   removeItem(itemId) {
     const { items } = this.state
     var item = items.find(element => element.id === itemId)
@@ -97,7 +102,9 @@ class App extends Component {
                 items={this.state.items} 
                 changeStatus={this.changeStatus} 
                 removeItem={this.removeItem} 
-                addItem={this.addItem} />
+                addItem={this.addItem} 
+                updateItem={this.updateItem} 
+                />
             )}  
           />
           <Route path="/Categories" exact component={CategoriesList}/>

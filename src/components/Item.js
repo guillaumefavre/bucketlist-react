@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 function Item(props) {
 
-    let itemClass = props.status === 'TODO' ? 'todo' : 'done'
+    let itemClass = props.item.status === 'TODO' ? 'todo' : 'done'
     //let history = useHistory();
 
     return(
         <div className="item">
             <span className="glyphicon glyphicon-ok icon" aria-hidden="true" 
-                onClick={() => props.changeStatus(props.id)}>
+                onClick={() => props.changeStatus(props.item.id)}>
                 {icons.ok}
             </span>
             {/**
@@ -29,18 +29,16 @@ function Item(props) {
              */}
             <Link className={itemClass} 
                 to={{
-                    pathname: "/DetailItem/"+props.id,
+                    pathname: "/DetailItem/"+props.item.id,
                     state: {
-                        id: props.id,
-                        label: props.label,
-                        status: props.status
+                        item: props.item
                     }
                 }}
             >
-                {props.label} ({props.status})
+                {props.item.label} ({props.item.status})
             </Link>           
             <span className="glyphicon glyphicon-trash icon" aria-hidden="true" 
-                onClick={() => props.removeItem(props.id)}>
+                onClick={() => props.removeItem(props.item.id)}>
                 {icons.cancel}
             </span>
         </div>

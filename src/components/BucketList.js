@@ -30,8 +30,9 @@ class BucketList extends Component {
     
             itemsByCategory.forEach((element) => {
                 rows.push(
-                    <Item key={element.id} id={element.id} label={element.label} status={element.status} 
-                        textColor="orange" changeStatus={this.props.changeStatus} removeItem={this.props.removeItem}></Item>
+                    <Item key={element.id} item={element}
+                        textColor="orange" changeStatus={this.props.changeStatus} removeItem={this.props.removeItem} 
+                        updateItem={this.props.updateItem}></Item>
                 );
             });
         });
