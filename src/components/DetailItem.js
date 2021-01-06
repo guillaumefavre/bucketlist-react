@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useHistory } from 'react-router-dom'
 
 
 function DetailItem(props) {
 
     let {slug} = useParams();
     let location = useLocation();
+    let history = useHistory();
 
     const [label , setLabel] = useState(location.state && location.state.item.label)
 
@@ -17,7 +18,6 @@ function DetailItem(props) {
         event.preventDefault();
         var itemWithNewLabel = location.state.item
         itemWithNewLabel.label = label
-        console.log('item WITH change : ', itemWithNewLabel)
 
         fetch('http://localhost:8090/bucketlist/1/items/'+itemWithNewLabel.id, {
             method: 'put',
@@ -28,14 +28,13 @@ function DetailItem(props) {
             body: JSON.stringify(itemWithNewLabel)
           }).then(response=>response.json())
             .then(response => {
-                console.log('Response : ', response)
+                history.push('/')
         }).catch(error => console.log("UPDATE Erreur : " + error));   
     }
 
     return( 
         <div>
-            <h1>DetailItem {slug} : {props.label} </h1>
-            <span>{location.state && location.state.item.label}</span>
+            <h1>Item N°{slug}</h1>
             <form className="App-form" onSubmit={e => {handleSubmit(e)}}>
             <input 
                 type="text" 
