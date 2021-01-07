@@ -55,13 +55,17 @@ class App extends Component {
   }
 
   removeItem(itemId) {
-    const { items } = this.state
-    var item = items.find(element => element.id === itemId)
-      
-    itemService.removeItem(item);
-    const index = items.indexOf(item)
-    items.splice(index, 1)
-    this.setState({ items: items });
+    try {
+      const { items } = this.state
+      var item = items.find(element => element.id === itemId)
+        
+      itemService.removeItem(item);
+      const index = items.indexOf(item)
+      items.splice(index, 1)
+      this.setState({ items: items });
+    } catch(e) {
+      this.setState({ error: e });
+    }
   }
 
   render() {

@@ -1,6 +1,6 @@
 const ItemService = {
 
-    getAllItems: async function() {
+    async getAllItems() {
         try {
             const response = await fetch('http://localhost:8090/bucketlist/1/items');
             return await response.json();
@@ -9,7 +9,7 @@ const ItemService = {
         }        
     },
 
-    updateItem: function(item, history) {
+    updateItem(item, history) {
 
         fetch('http://localhost:8090/bucketlist/1/items/'+item.id, {
             method: 'put',
@@ -24,7 +24,7 @@ const ItemService = {
         }).catch(error => console.log("UPDATE Erreur : " + error));  
     },
 
-    changeStatus: function(item) {
+    changeStatus(item) {
         fetch('http://localhost:8090/bucketlist/1/items/'+item.id, {
             method: 'put',
             headers: {
@@ -35,7 +35,7 @@ const ItemService = {
           }).catch(error => console.log("UPDATE Erreur : " + error));  
     },
 
-    addItem: async function(item) {
+    async addItem(item) {
         try {        
             const response = await fetch('http://localhost:8090/bucketlist/1/items', {
                 method: 'post',
@@ -51,11 +51,14 @@ const ItemService = {
         }  
     },
 
-    removeItem(item) {
+    async removeItem(item) {
         fetch('http://localhost:8090/bucketlist/1/items/'+item.id, {
             method: 'delete'
           }).then(response=>response.text())
-            .catch(error => console.log("DELETE Erreur : " + error));  
+            .catch(error => {
+                console.log("DELETE Erreur : " + error)
+                throw new Error('Erreur lors de la suppression de l\'item ', item.id);
+            });  
     }
 }
 
