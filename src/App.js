@@ -6,6 +6,7 @@ import CategoriesList from './components/CategoriesList';
 import DetailItem from './components/DetailItem';
 import NavigationBar from './components/NavigationBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import itemService from './services/ItemService'
 
 class App extends Component {
 
@@ -22,16 +23,14 @@ class App extends Component {
     this.updateItem = this.updateItem.bind(this);
   }
 
-  componentDidMount() {
-
-    fetch('http://localhost:8090/bucketlist/1/items')
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ items: response });
-      })
-      .catch(error => console.log("Erreur : " + error));
-
+  async componentDidMount() {
+    try {
+      this.setState({ items: await itemService.getAllItems() });
+    } catch(e) {
+      this.setState({ error: e });
+    }
   }
+
 
   addItem(newItemLabel, category) {
 
@@ -91,6 +90,10 @@ class App extends Component {
   }
 
   render() {
+    const { error } = this.state
+    if(error) {
+      return <p>{error.message}</p>;
+    }
     return (
       <div>
         <Router>

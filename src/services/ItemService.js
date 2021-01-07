@@ -1,5 +1,14 @@
 const ItemService = {
-    
+
+    getAllItems: async function() {
+        try {
+            const response = await fetch('http://localhost:8090/bucketlist/1/items');
+            return await response.json();
+        } catch (error) {
+            throw new Error('Erreur lors de la récupération des items');
+        }        
+    },
+
     updateItem: function(item, history) {
         console.log('service updateItem')
 
