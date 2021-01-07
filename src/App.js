@@ -55,17 +55,9 @@ class App extends Component {
     var item = items.find(element => element.id === itemId)
     item.status = item.status === 'TODO' ? 'DONE' : 'TODO'
 
-    fetch('http://localhost:8090/bucketlist/1/items/'+itemId, {
-      method: 'put',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item)
-    }).then(response=>response.json())
-      .then(response => {
-        this.setState({ items: items });
-      });
+    itemService.changeStatus(item);
+
+    this.setState({ items: items });
   }
 
   removeItem(itemId) {
