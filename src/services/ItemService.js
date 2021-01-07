@@ -49,6 +49,13 @@ const ItemService = {
         } catch (error) {
             throw new Error('Erreur lors de l\'ajout de l\'item');
         }  
+    },
+
+    removeItem(item) {
+        fetch('http://localhost:8090/bucketlist/1/items/'+item.id, {
+            method: 'delete'
+          }).then(response=>response.text())
+            .catch(error => console.log("DELETE Erreur : " + error));  
     }
 }
 

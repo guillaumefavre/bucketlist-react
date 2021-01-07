@@ -57,17 +57,11 @@ class App extends Component {
   removeItem(itemId) {
     const { items } = this.state
     var item = items.find(element => element.id === itemId)
-
-    fetch('http://localhost:8090/bucketlist/1/items/'+itemId, {
-      method: 'delete'
-    }).then(response=>response.text())
-      .then(response => {
-        // On retire un élément à l'index de l'item
-        const index = items.indexOf(item)
-        items.splice(index, 1)
-        this.setState({ items: items });
-      })
-      .catch(error => console.log("DELETE Erreur : " + error));   
+      
+    itemService.removeItem(item);
+    const index = items.indexOf(item)
+    items.splice(index, 1)
+    this.setState({ items: items });
   }
 
   render() {
