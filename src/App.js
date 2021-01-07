@@ -31,23 +31,17 @@ class App extends Component {
   }
 
 
-  addItem(newItemLabel, category) {
+  async addItem(newItemLabel, category) {
 
     const { items } = this.state
     const newItem = { category: category, label: newItemLabel, status: 'TODO'}
 
-    fetch('http://localhost:8090/bucketlist/1/items', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newItem)
-    }).then(response=>response.json())
-      .then(response => {
-        this.setState({ items: [...items, response] });
-      });
-
+    try {
+      var retour = await itemService.addItem(newItem);
+      this.setState({ items: [...items, retour] });
+    } catch(e) {
+      this.setState({ error: e });
+    }
   }
 
   changeStatus(itemId) {
