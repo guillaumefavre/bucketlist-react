@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { useParams, useLocation, useHistory } from 'react-router-dom'
+import itemService from '../services/ItemService'
 
 
-function DetailItem(props) {
+function DetailItem() {
 
     let {slug} = useParams();
     let location = useLocation();
@@ -19,17 +20,7 @@ function DetailItem(props) {
         var itemWithNewLabel = location.state.item
         itemWithNewLabel.label = label
 
-        fetch('http://localhost:8090/bucketlist/1/items/'+itemWithNewLabel.id, {
-            method: 'put',
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(itemWithNewLabel)
-          }).then(response=>response.json())
-            .then(response => {
-                history.push('/')
-        }).catch(error => console.log("UPDATE Erreur : " + error));   
+        itemService.updateItem(itemWithNewLabel, history);
     }
 
     return( 
